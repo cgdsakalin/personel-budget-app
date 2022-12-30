@@ -1,6 +1,10 @@
 const express = require("express"); //Import the express dependency
 const app = express(); //Instantiate an express app, the main work horse of this server
 const port = 3000; //Save the port number where your server will be listening
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 let envelopes_data = [
   {
@@ -102,5 +106,25 @@ app.get("/envelopes/:id", (req, res) => {
   const envelope = retrieveEnvelopeById(Number(envelopeId));
 
   // send the envelope as a response to the client
+  res.send({ envelope });
+});
+
+app.post("/envelopes/:id/", (req, res) => {
+  // extract the envelope ID and amount to be subtracted from the request object
+  const envelopeId = req.params.id;
+  const amount = req.body["amount"];
+  console.log(amount, envelopeId);
+
+  // validate the request data
+  if (!envelopeId || !amount) {
+    return res.status(400).send({ message: "Invalid request data" });
+  }
+
+  // retrieve the envelope with the corresponding ID from the database or global variable
+  let envelope = retrieveEnvelopeById(envelopeId);
+
+  // update the envelope's budget and the total budget
+
+  envelope.information.budget = envelope.information.budget - amount;
   res.send({ envelope });
 });
