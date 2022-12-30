@@ -142,3 +142,17 @@ app.delete("/envelopes/:id/", (req, res) => {
   // return a response indicating that the envelope was successfully deleted
   res.send({ message: "Envelope deleted successfully" });
 });
+
+app.post("/envelopes/transfer/:from/:to/", (req, res) => {
+  const toEnvelopeId = req.params.to;
+  const fromEnvelopeId = req.params.from;
+  const amount = req.body.amount;
+
+  let toEnvelope = retrieveEnvelopeById(toEnvelopeId);
+  let fromEnvelope = retrieveEnvelopeById(fromEnvelopeId);
+
+  toEnvelope.information.budget += amount;
+  fromEnvelope.information.budget -= amount;
+
+  res.send({ toEnvelope, fromEnvelope });
+});
