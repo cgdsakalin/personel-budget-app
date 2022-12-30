@@ -6,15 +6,57 @@ let envelopes_data = [
   {
     id: 1,
     information: {
-      title: "test1",
+      title: "Groceries",
       budget: 20,
     },
   },
   {
     id: 2,
     information: {
-      title: "test2",
+      title: "Gas",
       budget: 30,
+    },
+  },
+  {
+    id: 3,
+    information: {
+      title: "Health and grooming",
+      budget: 50,
+    },
+  },
+  {
+    id: 4,
+    information: {
+      title: "Clothing",
+      budget: 60,
+    },
+  },
+  {
+    id: 5,
+    information: {
+      title: "Dining out",
+      budget: 70,
+    },
+  },
+  {
+    id: 6,
+    information: {
+      title: "Household items",
+      budget: 80,
+    },
+  },
+  {
+    id: 7,
+    information: {
+      title: "Pet care",
+      budget: 15,
+    },
+  },
+  {
+    id: 8,
+    information: {
+      title: "Children's items",
+      budget: 40,
     },
   },
 ];
