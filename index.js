@@ -61,6 +61,13 @@ let envelopes_data = [
   },
 ];
 
+const retrieveEnvelopeById = (id) => {
+  const envelope = envelopes_data.find(
+    (envelope) => envelope.id === Number(id)
+  );
+  return envelope;
+};
+
 //Idiomatic expression in express to route and respond to a client request
 app.get("/", (req, res) => {
   //get requests to the root ("/") will route here
@@ -85,4 +92,15 @@ app.post("/envelopes", (req, res) => {
 app.get("/allEnvelopes", (req, res) => {
   const envelopes = envelopes_data;
   res.send({ envelopes });
+});
+
+app.get("/envelopes/:id", (req, res) => {
+  // extract the envelope ID from the request object
+  const envelopeId = req.params.id;
+
+  // retrieve the envelope with the corresponding ID from the database or global variable
+  const envelope = retrieveEnvelopeById(Number(envelopeId));
+
+  // send the envelope as a response to the client
+  res.send({ envelope });
 });
