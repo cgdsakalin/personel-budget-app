@@ -2,6 +2,23 @@ const express = require("express"); //Import the express dependency
 const app = express(); //Instantiate an express app, the main work horse of this server
 const port = 3000; //Save the port number where your server will be listening
 
+let envelopes_data = [
+  {
+    id: 1,
+    information: {
+      title: "test1",
+      budget: 20,
+    },
+  },
+  {
+    id: 2,
+    information: {
+      title: "test2",
+      budget: 30,
+    },
+  },
+];
+
 //Idiomatic expression in express to route and respond to a client request
 app.get("/", (req, res) => {
   //get requests to the root ("/") will route here
@@ -17,26 +34,13 @@ app.listen(port, () => {
 app.post("/envelopes", (req, res) => {
   // extract the information about the envelopes and total budget from the request body
 
-  let envelopes = [
-    {
-      id: 1,
-      information: {
-        title: "test1",
-        budget: 20,
-      },
-    },
-    {
-      id: 2,
-      information: {
-        title: "test2",
-        budget: 30,
-      },
-    },
-  ];
-
   // generate the individual budget envelopes
   // code goes here
-
   // send a response to the client
+  res.send({ message: "Envelopes created successfully" });
+});
+
+app.get("/allEnvelopes", (req, res) => {
+  const envelopes = envelopes_data;
   res.send({ envelopes });
 });
