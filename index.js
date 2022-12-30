@@ -128,3 +128,17 @@ app.post("/envelopes/:id/", (req, res) => {
   envelope.information.budget = envelope.information.budget - amount;
   res.send({ envelope });
 });
+
+app.delete("/envelopes/:id/", (req, res) => {
+  // extract the envelope ID from the request object
+  const envelopeId = req.params.id;
+
+  // use the filter function to create a new array of envelopes that excludes the envelope with the specified ID
+  envelopes_data = envelopes_data.filter(
+    (envelope) => envelope.id !== Number(envelopeId)
+  );
+  console.log(envelopes_data);
+
+  // return a response indicating that the envelope was successfully deleted
+  res.send({ message: "Envelope deleted successfully" });
+});
