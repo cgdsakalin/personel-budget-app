@@ -13,3 +13,30 @@ app.listen(port, () => {
   //server starts listening for any attempts from a client to connect at port: {port}
   console.log(`Now listening on port ${port}`);
 });
+
+app.post("/envelopes", (req, res) => {
+  // extract the information about the envelopes and total budget from the request body
+
+  let envelopes = [
+    {
+      id: 1,
+      information: {
+        title: "test1",
+        budget: 20,
+      },
+    },
+    {
+      id: 2,
+      information: {
+        title: "test2",
+        budget: 30,
+      },
+    },
+  ];
+
+  // generate the individual budget envelopes
+  // code goes here
+
+  // send a response to the client
+  res.send({ envelopes });
+});
